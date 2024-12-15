@@ -53,4 +53,4 @@ export const environment = {
 
 // Server URL
 environment.serverUrl = `${environment.baseApiUrl}${environment.apiProvider}${environment.apiVersion}`;
-environment.oauth.serverUrl = `${environment.baseApiUrl}${environment.apiProvider}`;
+//environment.oauth.serverUrl = `${environment.baseApiUrl}${environment.apiProvider}`;
