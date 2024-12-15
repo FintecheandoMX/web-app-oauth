@@ -96,9 +96,9 @@ export class AuthenticationService {
       let httpParams = new HttpParams();
       httpParams = httpParams.set('username', loginContext.username);
       httpParams = httpParams.set('password', loginContext.password);
-      httpParams = httpParams.set('client_id', 'web-app');
-      httpParams = httpParams.set('grant_type', 'password');
-      httpParams = httpParams.set('client_secret', 'Jd86ZlMdtAkT70DbHBzIVO6UgGeHz5xY');
+      httpParams = httpParams.set('client_id', `${environment.oauth.appId}`);
+      httpParams = httpParams.set('grant_type', `${environment.oauth.grantType}`);
+      httpParams = httpParams.set('client_secret', `${environment.oauth.clientSecret}`);
       let headers = new HttpHeaders();
       headers = headers.set('Content-Type', 'application/x-www-form-urlencoded')
       return this.http.disableApiPrefix().post(`${environment.oauth.serverUrl}/token`, httpParams.toString(), {headers: headers})
@@ -130,7 +130,6 @@ export class AuthenticationService {
     this.refreshTokenOnExpiry(tokenResponse.expires_in);
     let headers = new HttpHeaders();    
     headers = headers.set('Authorization', 'bearer '+tokenResponse.access_token)
-    console.log("URL "+`${environment.serverUrl}`);
     this.http.disableApiPrefix().get(`${environment.serverUrl}/userdetails`,{ headers: headers })
       .subscribe((credentials: Credentials) => {
         this.onLoginSuccess(credentials);
@@ -155,9 +154,9 @@ export class AuthenticationService {
     const oAuthRefreshToken = JSON.parse(this.storage.getItem(this.oAuthTokenDetailsStorageKey)).refresh_token;
     this.authenticationInterceptor.removeAuthorization();    
     let httpParams = new HttpParams();
-    httpParams = httpParams.set('client_id', 'web-app');
-    httpParams = httpParams.set('grant_type', 'password');
-    httpParams = httpParams.set('client_secret', 'Jd86ZlMdtAkT70DbHBzIVO6UgGeHz5xY');    
+    httpParams = httpParams.set('client_id', `${environment.oauth.appId}`);
+    httpParams = httpParams.set('grant_type', `${environment.oauth.grantType}`);
+    httpParams = httpParams.set('client_secret', `${environment.oauth.clientSecret}`);
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/x-www-form-urlencoded')
     return this.http.disableApiPrefix().post(`${environment.oauth.serverUrl}/token`, httpParams.toString(), {headers: headers})
