@@ -154,14 +154,15 @@ export class AuthenticationService {
   private refreshOAuthAccessToken() {
     console.log("private refreshOAuthAccessToken()");
     const oAuthRefreshToken = JSON.parse(this.storage.getItem(this.oAuthTokenDetailsStorageKey)).refresh_token;
+    console.log("oAuthRefreshToken "+oAuthRefreshToken);
     this.authenticationInterceptor.removeAuthorization();    
     const credentials = JSON.parse(this.storage.getItem(this.credentialsStorageKey));
     console.log("credentials.username "+credentials.username);
     let httpParams = new HttpParams();    
     httpParams = httpParams.set('username', credentials.username);
     httpParams = httpParams.set('client_id', `${environment.oauth.appId}`);
-    httpParams = httpParams.set('grant_type', `${environment.oauth.grantType}`);
-    httpParams = httpParams.set('client_secret', `${environment.oauth.clientSecret}`);
+    httpParams = httpParams.set('grant_type', 'refresh_token');
+    httpParams = httpParams.set('refresh_token', oAuthRefreshToken);
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/x-www-form-urlencoded')
     return this.http.disableApiPrefix().post(`${environment.oauth.serverUrl}/token`, httpParams.toString(), {headers: headers})
