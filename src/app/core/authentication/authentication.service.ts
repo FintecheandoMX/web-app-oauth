@@ -144,6 +144,7 @@ export class AuthenticationService {
    * @param {number} expiresInTime OAuth2 token expiry time in seconds.
    */
   private refreshTokenOnExpiry(expiresInTime: number) {
+    console.log("private refreshTokenOnExpiry(expiresInTime: number)");
     setTimeout(() => this.refreshOAuthAccessToken(), expiresInTime * 1000);
   }
 
@@ -151,6 +152,7 @@ export class AuthenticationService {
    * Refreshes the oauth2 authorization token.
    */
   private refreshOAuthAccessToken() {
+    console.log("private refreshOAuthAccessToken()");
     const oAuthRefreshToken = JSON.parse(this.storage.getItem(this.oAuthTokenDetailsStorageKey)).refresh_token;
     this.authenticationInterceptor.removeAuthorization();    
     const credentials = JSON.parse(this.storage.getItem(this.credentialsStorageKey));
