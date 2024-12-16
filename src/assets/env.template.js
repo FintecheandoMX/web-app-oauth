@@ -47,7 +47,4 @@
   // OAuth Client Secret 
   window['env']['oauthClientSecret'] = '$MIFOS_OAUTH_CLIENT_SECRET';
 
-  // OAuth Grant Type
-  window['env']['oauthGrantType'] = '$MIFOS_OAUTH_GRANT_TYPE';
-
 })(this);
