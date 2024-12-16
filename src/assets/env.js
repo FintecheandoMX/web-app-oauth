@@ -36,9 +36,15 @@
   window['env']['sessionIdleTimeout'] = '0';
 
   // OAuth Server Enabled  
-  window['env']['oauthServerEnabled'] = 'false';
+  window['env']['oauthServerEnabled'] = '';
 
   // OAuth Server URL  
   window['env']['oauthServerUrl'] = '';
+
+  // OAuth Client Id  
+  window['env']['oauthAppId'] = '';
+
+  // OAuth Client Secret 
+  window['env']['oauthClientSecret'] = '';
 
 })(this);
